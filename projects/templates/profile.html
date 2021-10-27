@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% block content%}
+
+<head>
+</head>
+
+<body style=" margin-top: 100px;background-color: rgb(235, 232, 232) !important; ">
+
+
+
+    <div class="container" id='prof'>
+        <h2 class="text-center" style="margin-bottom: 10px;font-size: 30px;">{{user}} profile</h2>
+        <div class="card" style="background-color:white">
+            <divaclass="row">
+                {% for prof in profile %}
+                <div class="col-md-10" style="margin-left: 20px;margin-top:30px;font-size: 15px;">
+                    <img src="{{prof.profile_pic.url}}" alt="profile"
+                        style="width: 350px; height: 350px; border-radius: 50%">
+                    <p><b>Name: </b><i>{{name}}</i></p>
+                    <p><b>Bio: </b><i class="text-center">{{prof.bio}}</i></p>
+                    <p><b>Lastly updated on </b><i>{{prof.updated_on}}</i></p>
+                    <a id="update" class="btn" href="{%url 'update-profile' %}"
+                        style="float: right;font-size: 20px; background-color: black;color: white;"><b>Update
+                            profile</b> </a>
+                </div>
+                <div class="col-md-2"></div>
+
+
+
+                {% endfor%}
+
+
+        </div>
+
+    </div>
+
+    <div class="mypics" style="margin-top: 20px">
+        <h2 class="text-center" style="margin-bottom: 10px">~Your timeline~</h2>
+        <div class="row">
+            {%for project in projects%}
+            <div class="col-md-4">
+
+                <div class="card" style="height: 400px; width: 350px; background-color: whitesmoke;">
+                    <h3 class="text-center">{{project.title}}</h3>
+                    <img src="{{project.img_project.url}}" alt="title" class="img-responsive"
+                        style="width:100%;height:100%">
+                    <div class="details" style="font-size: 17px;text-align: center;">
+                        <p><i>Posted by </i><b>{{project.posted_by}}</b> <br>
+                            <i>on </i><b>{{project.posted_on}}</b>
+                        </p>
+                        <p><a href="{{project.project_url}}" class="btn" style="font-size: 14px;">Live link to the
+                                site</a></p>
+                    </div>
+                    <a href="/review/project/{{project.id}}"
+                        style="margin-left:70%; font-size: 20px; background-color: teal;height: 35px; width: 90px;"
+                        class="btn">more...</a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+    </div>
+</body>
+{% endblock %}

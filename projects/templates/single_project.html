@@ -1,0 +1,122 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{% load bootstrap4%}
+{%block content%}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body">
+
+    <div class="container">
+        <div class="row">
+            {% for mypro in project%}
+            <div class="col-md-6">
+                <div class="card" style="margin-top: 25px;">
+                    <h3 class="text-center" style="margin-top: 20px;">{{proj.title}}</h3>
+                    <img src="{{mypro.img_project.url}}" alt="title" style="width: 100%; height: 100%;"
+                        class="img-responsive">
+                    <div class="details" style="margin-left: 35px; margin-top: 15px; font-size: 15px;">
+                        <p><b>reviews</b> {{reviews.count}}</p>
+                        <p><b>design ratings:::</b> {{design}}%</p>
+                        <p><b>usability ratings:::</b> {{usability}}%</p>
+                        <p><b>content ratings:::</b>{{content}}%</p>
+                        <p><b>Live link:::</b>Live link:::<a href="{{mypro.project_url}}">{{proj.project_url}}</a></p>
+                        <p><b>Project description</b></p>
+                        <p class="panel">{{proj.description}}</p>
+                        <p class="text-center"><i>Posted by </i><b>{{proj.posted_by}}</b><i> on</i> {{proj.posted_on}}
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="margin-top: 90px; margin-left: 45px;font-size: 16px;">
+                    <h2 class="text-center" style="font-size: 25px;margin-top: 20px;"> Write your review</h2>
+                    <form action="post/{{mypro.id}}" method="POST"
+                        style="margin-left: 20px;margin-right:20px;margin-bottom: 30px;">
+                        {%csrf_token%}
+                        {%bootstrap_form form%}
+                        <input type="submit" value="Post">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-6" style=" width: 100%; height:400px !important; overflow: auto;font-size: 16px;">
+                <h2 class="text-center" style="margin-top: 35px;"><b>Reviews</b></h2><br>
+                {%for review in reviews%}
+                <div class="card">
+                    <p style="margin-left: 15px;margin-top: 15px;">{{review.review}}</p>
+                    <p class="text-center"><i>Posted on </i><b>{{review.posted_on}}</b><br> <i>by</i><b>
+                            {{review.posted_by}}</b></p>
+
+                </div>
+                {%endfor%}
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center" style="font-size: 35px;">Rate our application according its design,usability and
+                    content.</h2>
+                <center style="margin-top:40px;">
+
+                    <form action="rate/post/{{project_id}}" method="POST">
+                        {%csrf_token%}
+                        <select name="design">
+                            <option name="">Design</option>
+                            <option name="" value="0">0</option>
+                            <option name="" value="1">1</option>
+                            <option name="" value="2">2</option>
+                            <option name="" value="3">3</option>
+                            <option name="" value="4">4</option>
+                            <option name="" value="5">5</option>
+                            <option name="" value="6">6</option>
+                            <option name="" value="7">7</option>
+                            <option name="" value="8">8</option>
+                            <option name="" value="9">9</option>
+
+                        </select>
+                        <select name="usability">
+                            <option name="">Usability</option>
+                            <option name="" value="0">0</option>
+                            <option name="" value="1">1</option>
+                            <option name="" value="2">2</option>
+                            <option name="" value="3">3</option>
+                            <option name="" value="4">4</option>
+                            <option name="" value="5">5</option>
+                            <option name="" value="6">6</option>
+                            <option name="" value="7">7</option>
+                            <option name="" value="8">8</option>
+                            <option name="" value="9">9</option>
+
+                        </select>
+                        <select name="content">
+                            <option name="">Content</option>
+                            <option name="" value="0">0</option>
+                            <option name="" value="1">1</option>
+                            <option name="" value="2">2</option>
+                            <option name="" value="3">3</option>
+                            <option name="" value="4">4</option>
+                            <option name="" value="5">5</option>
+                            <option name="" value="6">6</option>
+                            <option name="" value="7">7</option>
+                            <option name="" value="8">8</option>
+                            <option name="" value="9">9</option>
+
+                        </select>
+
+                        <input type="submit" value="Rate">
+                        <div class="message">
+                            {% for message in messages%}
+                            <h3 class="alert-danger">{{message}}</h3>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </center>
+            </div>
+        </div>
+    </div>
+</body>
+{%endblock%}
