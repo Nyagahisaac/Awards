@@ -1,1 +1,59 @@
-<p>design works!</p>
+{%extends 'base.html'%}
+{%load bootstrap4 %}
+{%load static%}
+{% block content%}
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+  
+
+</head>
+
+<body style="margin-top: 100px;">
+    <div class="front">
+        {% for message in messages%}
+        <p style="text-align: center; margin-right: 50px;font-size: 20px;">{{message}}</p>
+        {% endfor %}
+       
+        <div class="writing">
+            <p>
+                Site of the day by {{}}
+            </p>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 40px;">
+        <h2 class="text-center" style="font-size: 40px;">Rate our projects</h2>
+        <div class="row" style="margin-top: 20px;">
+            {%for project in projects%}
+            <div class="col-md-4">
+
+
+
+
+
+
+
+                <div class="card" style="height: 400px; width: 350px; background-color: whitesmoke;">
+                    <h3 class="text-center">{{project.title}}</h3>
+                    <img src="{{project.img_project.url}}" alt="title" class="img-responsive"
+                        style="width:100%;height:100%">
+                    <div class="details" style="font-size: 17px;text-align: center;">
+                        <p><i>Posted by </i><b>{{project.posted_by}}</b> <br>
+                            <i>on </i><b>{{project.posted_on}}</b>
+                        </p>
+                        <p><a href="{{project.project_url}}" class="btn" style="font-size: 14px;">Live link to the
+                                site</a></p>
+                    </div>
+                    <a href="/review/project/{{project.id}}"
+                        style="margin-left:70%; font-size: 20px; background-color: teal;height: 35px; width: 90px;"
+                        class="btn">more...</a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+</body>
+{% endblock%}
