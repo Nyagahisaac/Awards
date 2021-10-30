@@ -20,6 +20,7 @@ from projects.views import logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('',include('projects.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
     path('logout/',logout,name="logout"),

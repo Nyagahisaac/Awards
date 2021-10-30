@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'awwwards.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ratings',
+        'NAME': 'reserve',
         'USER': 'isaac',
         'PASSWORD': '2face',
         'DISABLE_SERVER_SIDE_CURSORS': True,    }

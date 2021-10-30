@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from .serialiers import ProfileSerializer,ProjectSerializer
 
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def home(request):
     project = Project_Post.get_all_projects()
     return render(request,"home.html",{"project":project})
