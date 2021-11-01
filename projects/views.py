@@ -15,8 +15,8 @@ from django.http.response import JsonResponse
 
 # @login_required(login_url='/accounts/login/')
 def home(request):
-    projects = Project_Post.get_all_projects()
-    return render(request,"home.html",{"projects":projects})
+    project = Project_Post.get_all_projects()
+    return render(request,"home.html",{"project":project})
 
 def logout_view(request):
     logout(request)
