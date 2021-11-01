@@ -15,17 +15,17 @@
             <div class="col-md-6">
                 <div class="card" style="margin-top: 25px;">
                     <h3 class="text-center" style="margin-top: 20px;">{{proj.title}}</h3>
-                    <img src="{{mypro.img_project.url}}" alt="title" style="width: 100%; height: 100%;"
+                    <img class="img-fluid" src="{{mypro.img_project.url}}" alt="title" style="width: 100%; height: 100%;"
                         class="img-responsive">
                     <div class="details" style="margin-left: 35px; margin-top: 15px; font-size: 15px;">
                         <p><b>reviews</b> {{reviews.count}}</p>
-                        <p><b>design ratings:::</b> {{design}}%</p>
-                        <p><b>usability ratings:::</b> {{usability}}%</p>
-                        <p><b>content ratings:::</b>{{content}}%</p>
-                        <p><b>Live link:::</b>Live link:::<a href="{{mypro.project_url}}">{{proj.project_url}}</a></p>
-                        <p><b>Project description</b></p>
-                        <p class="panel">{{proj.description}}</p>
-                        <p class="text-center"><i>Posted by </i><b>{{proj.posted_by}}</b><i> on</i> {{proj.posted_on}}
+                        <p><b>design ratings~: </b> {{design}}%</p>
+                        <p><b>usability ratings~:</b> {{usability}}%</p>
+                        <p><b>content ratings~:</b>{{content}}%</p>
+                       <a href="{{mypro.project_url}}"> <p><b>Live link:::</b> {{proj.project_url}}</a></p>
+                        <p><b>Project description</b> ~::{{mypro.description}}</p>
+                        
+                        <p class="text-center"><i>Posted by </i><b>{{mypro.posted_by}}</b><i> on</i> {{mypro.posted_on}}
                         </p>
 
                     </div>

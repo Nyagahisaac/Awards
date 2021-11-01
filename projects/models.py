@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.fields import TextField
 from tinymce.models import HTMLField
 
 
@@ -13,7 +14,7 @@ class Project_Post(models.Model):
     posted_by = models.ForeignKey(User,on_delete=models.CASCADE)
     img_project = models.ImageField(upload_to="project/")
     project_url = models.URLField()
-    description = HTMLField()
+    description = TextField()
     posted_on = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100,blank=True)
     
