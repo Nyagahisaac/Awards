@@ -13,10 +13,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 
 
-# @login_required(login_url='/accounts/login/')
 def home(request):
-    project = Project_Post.get_all_projects()
-    return render(request,"home.html",{"project":project})
+    projects = Project_Post.get_all_projects()
+    return render(request,"home.html",{"projects":projects})
 
 def logout_view(request):
     logout(request)
