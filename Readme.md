@@ -34,7 +34,7 @@ User Stories
    ### In your terminal:
 
       $ git clone https://github.com/Nyagah Isaac/Awards.git
-      $ cd rate_app
+      $ cd my awards
 
 ## Running the Application
 
