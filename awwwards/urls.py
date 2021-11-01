@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from projects.views import logout
+from projects.views import logout, logout_view
 from rest_framework import routers, serializers
 
 
@@ -23,6 +23,7 @@ from rest_framework import routers, serializers
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('projects.urls')),
+
     path('accounts/', include('registration.backends.simple.urls')),
-    path('logout/',logout,name="logout"),
+    path('logout/',logout_view,name="logout"),
 ]
