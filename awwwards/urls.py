@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from projects.views import logout
+from rest_framework import routers, serializers
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('',include('projects.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
     path('logout/',logout,name="logout"),

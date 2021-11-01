@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,9 +14,9 @@ urlpatterns=[
     path('project/search',views.search_view,name="search"),
     path('nav/',views.nav,name='nav'),
     path('api/profile/',views.ProfileList.as_view()),
-    path('api/project/',views.ProjectList.as_view()),
+    path('api/project/',views.ProjectList),
     
 ]
 
-# if settings.DEBUG:
-#     urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

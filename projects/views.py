@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -7,12 +8,15 @@ from .models import Project_Post,Profile,Reviews,Rates
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serialiers import ProfileSerializer,ProjectSerializer
+from rest_framework.parsers import JSONParser
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse
 
 
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def home(request):
-    project = Project_Post.get_all_projects()
-    return render(request,"home.html",{"project":project})
+    projects = Project_Post.get_all_projects()
+    return render(request,"home.html",{"projects":projects})
 
 def logout_view(request):
     logout(request)
@@ -26,7 +30,7 @@ def post_project_view(request):
         if form.is_valid():
             new_project = form.save(commit=False)
             new_project.posted_by = request.user
-            # new_project.save()
+            new_project.save()
             return redirect('home')
         else:
             messages.info(request,'all fields are required')
@@ -145,8 +149,43 @@ class ProfileList(APIView):
         serializers = ProfileSerializer(all_profiles, many = True)
         return Response(serializers.data)
     
+    
 class ProjectList(APIView):
     def get(self,request,format = None):
         all_projects = Project_Post.objects.all()
         serializers = ProjectSerializer(all_projects,many = True)
         return Response(serializers.data)
+        
+
+
+# @csrf_exempt
+# def ProjectList(request,id=0):
+#     if request.method=='GET':
+#         projects = Project_Post.objects.all()
+#         project_serializer = ProjectSerializer(projects, many=True)
+#         return JsonResponse(project_serializer.data, safe=False)
+
+#     elif request.method=='POST':
+#         project_data=JSONParser().parse(request)
+#         project_serializer = ProjectSerializer(data=project_data)
+#         if project_serializer.is_valid():
+#             project_serializer.save()
+#             return JsonResponse("Added Successfully!!" , safe=False)
+#         return JsonResponse("Failed to Add.",safe=False)
+    
+#     elif request.method=='PUT':
+#         project_data = JSONParser().parse(request)
+#         project=Project_Post.objects.get(ProjectId=project_data['ProjectId'])
+#         project_serializer=ProjectSerializer(project,data=project_data)
+#         if project_serializer.is_valid():
+#             project_serializer.save()
+#             return JsonResponse("Updated Successfully!!", safe=False)
+#         return JsonResponse("Failed to Update.", safe=False)
+
+#     elif request.method=='DELETE':
+#         project=Project_Post.objects.get(ProjectId=id)
+#         project.delete()
+#         return JsonResponse("Deleted Succeffully!!", safe=False)
+
+
+
