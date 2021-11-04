@@ -1,7 +1,7 @@
 # The Awwwards
 
 ## live link
-[Awwwards.](https://awardingapp.herokuapp.com/)  
+[Awwwards.](https://izoohhood.herokuapp.com/)  
 * This project was generated with Python version 3.8.0
 ## Author:
 ### Nyagah Isaac
