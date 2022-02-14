@@ -1,0 +1,28 @@
+name: GitHub Action
+
+on:
+  pull_request:
+  push:
+      branches:
+                - master
+                - develop 
+
+jobs:
+  test:
+    name: Running unit Tests
+    runs-on: ubuntu-latest
+  
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
